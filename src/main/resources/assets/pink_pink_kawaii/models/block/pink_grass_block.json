@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/dirt",
+    "side": "pink_pink_kawaii:block/pink_grass_block_side",
+    "particle": "pink_pink_kawaii:block/pink_grass_block_side",
+    "top": "pink_pink_kawaii:block/pink_grass_block_top"
+  }
+}
