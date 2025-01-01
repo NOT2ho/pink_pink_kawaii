@@ -67,9 +67,16 @@ object PinkPinkKawaii {
   val PINK_GRASS_BLOCK: RegistryObject[Block] = BLOCKS.register("pink_grass_block", () => new Block(BlockBehaviour.Properties.of()
                                                                                           .destroyTime(2.0f)
                                                                                           .explosionResistance(0.5f)))
+  val HEART_BLOCK: RegistryObject[Block] = BLOCKS.register("heart_block", () => new Block(BlockBehaviour.Properties.of()
+    .strength(2f)
+    .requiresCorrectToolForDrops()
+    .explosionResistance(0.5f)
+    .sound(SoundType.PINK_PETALS)))
   
-  val PINK_GRASS_BLOCK_ITEM: RegistryObject[Item] = ITEMS.register("pink_grass_block", () => new BlockItem(PINK_GRASS_BLOCK.get(), new Item.Properties()))
-
+  val PINK_GRASS_BLOCK_ITEM: RegistryObject[Item] = ITEMS.register("pink_grass_block"
+    , () => new BlockItem(PINK_GRASS_BLOCK.get(), new Item.Properties()))
+  val HEART_BLOCK_ITEM: RegistryObject[Item] = ITEMS.register("heart_block"
+    , () => new BlockItem(HEART_BLOCK.get(), new Item.Properties()))
   val CREATIVE_MODE_TABS: DeferredRegister[CreativeModeTab] = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID)
 
   val PINK_LIQUID_BUCKET: RegistryObject[Item] = ITEMS.register("pink_liquid_bucket",
