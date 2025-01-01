@@ -3,7 +3,7 @@ package com.not2ho.pinkpinkkawaii
 import com.not2ho.pinkpinkkawaii.fluid.{PinkFluid, PinkLiquid}
 import net.minecraft.core.registries.Registries
 import net.minecraft.world.item.{BlockItem, BucketItem, CreativeModeTab, CreativeModeTabs, Item, Items}
-import net.minecraft.world.level.block.{Block, Blocks}
+import net.minecraft.world.level.block.{Block, Blocks, DropExperienceBlock, LiquidBlock, SoundType}
 import net.minecraft.world.level.block.state.BlockBehaviour
 import net.minecraftforge.api.distmarker.Dist
 import net.minecraftforge.common.MinecraftForge
@@ -11,6 +11,7 @@ import net.minecraftforge.event.BuildCreativeModeTabContentsEvent
 import net.minecraft.client.renderer.RenderType
 import net.minecraftforge.event.server.ServerStartingEvent
 import net.minecraft.client.renderer.ItemBlockRenderTypes
+import net.minecraft.util.valueproviders.UniformInt
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.ModLoadingContext
 import net.minecraftforge.fml.common.Mod
@@ -19,7 +20,6 @@ import net.minecraftforge.fml.event.lifecycle.{FMLClientSetupEvent, FMLCommonSet
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext
 import net.minecraftforge.registries.{DeferredRegister, ForgeRegistries, RegistryObject}
 import org.apache.logging.log4j.LogManager
-import net.minecraft.world.level.block.LiquidBlock
 
 
 @Mod(PinkPinkKawaii.MOD_ID)
@@ -38,6 +38,31 @@ object PinkPinkKawaii {
     , () => new BlockItem(PINK_LIQUID_BLOCK.get(), new Item.Properties()))
 
 
+  val HEART_ORE: RegistryObject[DropExperienceBlock] = BLOCKS.register("heart_ore"
+                                          , () => new DropExperienceBlock
+      (BlockBehaviour.Properties.of.strength(3f)
+        .requiresCorrectToolForDrops()
+        .sound(SoundType.STONE), UniformInt.of(2,5)))
+
+  val HEART_ORE_ITEM: RegistryObject[Item] = ITEMS.register("heart_ore"
+    , () => new BlockItem(HEART_ORE.get(), new Item.Properties()))
+
+
+
+  val RAW_HEART: RegistryObject[Item] = ITEMS.register("raw_heart"
+    , () => new Item(new Item.Properties()))
+
+  val HEART_INGOT: RegistryObject[Item] = ITEMS.register("heart_ingot"
+    , () => new Item(new Item.Properties()))
+
+  val DEEPSLATE_HEART_ORE: RegistryObject[DropExperienceBlock] = BLOCKS.register("deepslate_heart_ore"
+    , () => new DropExperienceBlock
+      (BlockBehaviour.Properties.of.strength(4f)
+        .requiresCorrectToolForDrops()
+        .sound(SoundType.DEEPSLATE), UniformInt.of(3,6)))
+
+  val DEEPSLATE_HEART_ORE_ITEM: RegistryObject[Item] = ITEMS.register("deepslate_heart_ore"
+    , () => new BlockItem(DEEPSLATE_HEART_ORE.get(), new Item.Properties()))
 
   val PINK_GRASS_BLOCK: RegistryObject[Block] = BLOCKS.register("pink_grass_block", () => new Block(BlockBehaviour.Properties.of()
                                                                                           .destroyTime(2.0f)
@@ -50,7 +75,7 @@ object PinkPinkKawaii {
   val PINK_LIQUID_BUCKET: RegistryObject[Item] = ITEMS.register("pink_liquid_bucket",
     () => new BucketItem(PinkLiquid.SOURCE_PINK_LIQUID, new Item.Properties().craftRemainder(Items.BUCKET)
       .stacksTo(1)))
-  
+
   val PINK_TAB: RegistryObject[CreativeModeTab] = CREATIVE_MODE_TABS.register("pink_tab", () => CreativeModeTab.builder()
     .withTabsBefore(CreativeModeTabs.COMBAT)
     .icon(() => PINK_GRASS_BLOCK_ITEM.get().getDefaultInstance)

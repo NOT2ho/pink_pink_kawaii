@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "cookingtime": 200,
+  "experience": 2,
+  "group": "heart",
+  "ingredient": {
+    "item": "pink_pink_kawaii:raw_heart"
+  },
+  "result": "pink_pink_kawaii:heart_ingot"
+}
